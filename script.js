@@ -2,13 +2,13 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/fireba
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
 
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'project-777341514008.firebaseapp.com',
-  projectId: 'project-777341514008',
-  storageBucket: 'project-777341514008.appspot.com',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
-  measurementId: 'YOUR_MEASUREMENT_ID'
+  apiKey: 'AIzaSyDViEZzWLLucc1UoxdxNaIag1ZLLEPZ9wQ',
+  authDomain: 'darkstarawards.firebaseapp.com',
+  projectId: 'darkstarawards',
+  storageBucket: 'darkstarawards.firebasestorage.app',
+  messagingSenderId: '777341514008',
+  appId: '1:777341514008:web:15b6e46490d19f4fbd2e6d',
+  measurementId: 'G-86C8YX6VQM'
 };
 
 const app = initializeApp(firebaseConfig);
