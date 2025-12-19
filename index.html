@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dark Star Awards</title>
+  <link rel="preload" as="video" href="./BackgroundVideo.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="./DSALogo.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="hero">
+    <video class="hero__video" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./BackgroundVideo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <img src="./DSALogo.png" alt="Dark Star Awards logo" class="hero__logo">
+      <p class="hero__tagline">Celebrating the boldest creators in the Dark Star community.</p>
+      <a class="button" href="#entries">Submit Your Entry</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="panel">
+      <div class="panel__content">
+        <h2>About the Competition</h2>
+        <p>The Dark Star Awards spotlight visionary filmmakers, designers, and storytellers who push creative boundaries. Submit your most daring work and join a showcase judged by industry veterans and community leaders.</p>
+        <div class="highlights">
+          <div class="highlight">
+            <h3>Who Can Enter</h3>
+            <p>Open to solo creators and teams across film, digital art, animation, and interactive media.</p>
+          </div>
+          <div class="highlight">
+            <h3>What We Value</h3>
+            <p>Bold concepts, polished execution, and stories that resonate with the Dark Star ethos.</p>
+          </div>
+          <div class="highlight">
+            <h3>Why Participate</h3>
+            <p>Gain recognition, connect with peers, and inspire the next wave of creative pioneers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="entries" class="panel panel--alt">
+      <div class="panel__content">
+        <h2>How to Submit</h2>
+        <ol class="steps">
+          <li><strong>Prepare your entry</strong>: export your film or interactive demo as a shareable link (e.g., Vimeo, YouTube, or hosted build).</li>
+          <li><strong>Gather your assets</strong>: include a 200-word project description and 2–3 high-resolution stills.</li>
+          <li><strong>Upload</strong>: place your files in a single folder and compress it into a .zip archive.</li>
+          <li><strong>Send</strong>: upload the archive using the competition portal or share a secure download link.</li>
+        </ol>
+        <p class="note">Need help? Reach out to <a href="mailto:awards@darkstar.com">awards@darkstar.com</a> for guidance.</p>
+      </div>
+    </section>
+
+    <section id="timeline" class="panel">
+      <div class="panel__content">
+        <h2>Judging Timeline</h2>
+        <div class="timeline">
+          <div class="timeline__item">
+            <span class="timeline__date">Entries Open</span>
+            <p>Submissions accepted now through the posted deadline.</p>
+          </div>
+          <div class="timeline__item">
+            <span class="timeline__date">Screening Round</span>
+            <p>Our review team screens all entries for eligibility and impact.</p>
+          </div>
+          <div class="timeline__item">
+            <span class="timeline__date">Finalist Review</span>
+            <p>Judges evaluate shortlisted projects on creativity, craft, and resonance.</p>
+          </div>
+          <div class="timeline__item">
+            <span class="timeline__date">Winners Announced</span>
+            <p>Top honors revealed during the Dark Star Awards showcase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© Dark Star Awards. All rights reserved.</p>
+  </footer>
+</body>
+</html>
