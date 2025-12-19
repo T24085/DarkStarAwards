@@ -18,17 +18,20 @@
     <div class="hero__content">
       <img src="./DSALogo.png" alt="Dark Star Awards logo" class="hero__logo">
       <p class="hero__tagline">Celebrating the boldest creators in the Dark Star community.</p>
+
       <div class="hero__actions">
         <a class="button" href="#entries">Submit Your Entry</a>
         <button class="button button--ghost" id="googleSignIn">Sign in with Google</button>
       </div>
       <p class="auth-note" id="authStatus" aria-live="polite">Sign in to save entries and track judging status.</p>
+
     </div>
   </header>
 
   <main>
     <section id="about" class="panel">
       <div class="panel__content">
+
         <div class="section-header">
           <h2>About the Competition</h2>
           <p>Built for creators pushing creative boundaries across the Dark Star galaxy.</p>
@@ -38,6 +41,7 @@
           <div class="highlight">
             <h3>Who Can Enter</h3>
             <p>Open to solo creators and teams across film, digital art, animation, web, and interactive media.</p>
+
           </div>
           <div class="highlight">
             <h3>What We Value</h3>
@@ -53,10 +57,12 @@
 
     <section id="entries" class="panel panel--alt">
       <div class="panel__content">
+
         <div class="section-header">
           <h2>How to Submit</h2>
           <p>Ready to enter? Follow the checklist and keep your URLs public.</p>
         </div>
+
         <ol class="steps">
           <li><strong>Prepare your entry</strong>: export your film or interactive demo as a shareable link (e.g., Vimeo, YouTube, or hosted build).</li>
           <li><strong>Gather your assets</strong>: include a 200-word project description and 2–3 high-resolution stills.</li>
@@ -66,6 +72,7 @@
         <p class="note">Need help? Reach out to <a href="mailto:awards@darkstar.com">awards@darkstar.com</a> for guidance.</p>
       </div>
     </section>
+
 
     <section id="showcase" class="panel">
       <div class="panel__content entries">
@@ -84,6 +91,7 @@
           <h2>Judging Timeline</h2>
           <p>Stay in the loop from submissions to awards.</p>
         </div>
+
         <div class="timeline">
           <div class="timeline__item">
             <span class="timeline__date">Entries Open</span>
@@ -104,6 +112,7 @@
         </div>
       </div>
     </section>
+
 
     <section id="rules" class="panel">
       <div class="panel__content rules">
@@ -261,12 +270,15 @@ service firebase.storage {
         <p class="note">Enable Firestore and Storage in production, and add indexes for queries (e.g., category, scores, updatedAt).</p>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
     <p>© Dark Star Awards. All rights reserved.</p>
   </footer>
 
+
   <script type="module" src="./script.js"></script>
+
 </body>
 </html>
