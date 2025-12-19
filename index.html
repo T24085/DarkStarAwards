@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dark Star Awards</title>
+  <link rel="preload" as="video" href="./BackgroundVideo.mp4" type="video/mp4">
+  <link rel="preload" as="image" href="./DSALogo.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="hero">
+    <video class="hero__video" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./BackgroundVideo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <img src="./DSALogo.png" alt="Dark Star Awards logo" class="hero__logo">
+      <p class="hero__tagline">Celebrating the boldest creators in the Dark Star community.</p>
+      <div class="hero__actions">
+        <a class="button" href="#entries">Submit Your Entry</a>
+        <button class="button button--ghost" id="googleSignIn">Sign in with Google</button>
+      </div>
+      <p class="auth-note" id="authStatus" aria-live="polite">Sign in to save entries and track judging status.</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="panel">
+      <div class="panel__content">
+        <div class="section-header">
+          <h2>About the Competition</h2>
+          <p>Built for creators pushing creative boundaries across the Dark Star galaxy.</p>
+        </div>
+        <p>The Dark Star Awards spotlight visionary filmmakers, designers, and storytellers who redefine what is possible. Submit your most daring work and join a showcase judged by industry veterans and community leaders.</p>
+        <div class="highlights">
+          <div class="highlight">
+            <h3>Who Can Enter</h3>
+            <p>Open to solo creators and teams across film, digital art, animation, web, and interactive media.</p>
+          </div>
+          <div class="highlight">
+            <h3>What We Value</h3>
+            <p>Bold concepts, polished execution, and stories that resonate with the Dark Star ethos.</p>
+          </div>
+          <div class="highlight">
+            <h3>Why Participate</h3>
+            <p>Gain recognition, connect with peers, and inspire the next wave of creative pioneers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="entries" class="panel panel--alt">
+      <div class="panel__content">
+        <div class="section-header">
+          <h2>How to Submit</h2>
+          <p>Ready to enter? Follow the checklist and keep your URLs public.</p>
+        </div>
+        <ol class="steps">
+          <li><strong>Prepare your entry</strong>: export your film or interactive demo as a shareable link (e.g., Vimeo, YouTube, or hosted build).</li>
+          <li><strong>Gather your assets</strong>: include a 200-word project description and 2–3 high-resolution stills.</li>
+          <li><strong>Upload</strong>: place your files in a single folder and compress it into a .zip archive.</li>
+          <li><strong>Send</strong>: upload the archive using the competition portal or share a secure download link.</li>
+        </ol>
+        <p class="note">Need help? Reach out to <a href="mailto:awards@darkstar.com">awards@darkstar.com</a> for guidance.</p>
+      </div>
+    </section>
+
+    <section id="showcase" class="panel">
+      <div class="panel__content entries">
+        <div class="section-header">
+          <h2>Live Entry Showcase</h2>
+          <p>Viewer-friendly cards with direct links to the websites competitors upload.</p>
+        </div>
+        <div class="entry-grid" id="entryGrid" aria-live="polite"></div>
+        <p class="note">Signed-in judges can bookmark entries for follow-up once Firebase data capture is connected.</p>
+      </div>
+    </section>
+
+    <section id="timeline" class="panel panel--alt">
+      <div class="panel__content">
+        <div class="section-header">
+          <h2>Judging Timeline</h2>
+          <p>Stay in the loop from submissions to awards.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline__item">
+            <span class="timeline__date">Entries Open</span>
+            <p>Submissions accepted now through the posted deadline.</p>
+          </div>
+          <div class="timeline__item">
+            <span class="timeline__date">Screening Round</span>
+            <p>Our review team screens all entries for eligibility and impact.</p>
+          </div>
+          <div class="timeline__item">
+            <span class="timeline__date">Finalist Review</span>
+            <p>Judges evaluate shortlisted projects on creativity, craft, and resonance.</p>
+          </div>
+          <div class="timeline__item">
+            <span class="timeline__date">Winners Announced</span>
+            <p>Top honors revealed during the Dark Star Awards showcase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules" class="panel">
+      <div class="panel__content rules">
+        <div class="section-header">
+          <h2>Contest Rules</h2>
+          <p>🌌 Dark Star Awards — Website Development &amp; Design Contest</p>
+        </div>
+        <div class="rules__group">
+          <h3>1. Eligibility</h3>
+          <ul>
+            <li>Open to individual developers, designers, or teams.</li>
+            <li>Websites must be publicly accessible, fully functional, and created or significantly updated within the last 24 months.</li>
+            <li>Any tech stack allowed (HTML/CSS, JS frameworks, CMS, no-code, etc.).</li>
+          </ul>
+        </div>
+        <div class="rules__group">
+          <h3>2. Submission Requirements</h3>
+          <ul>
+            <li>Live website URL</li>
+            <li>Short project description (≤ 300 words)</li>
+            <li>Tech stack used</li>
+            <li>Category entered (see below)</li>
+            <li>Optional: GitHub repo, case study, or design mockups</li>
+            <li>🚫 No broken links, placeholder content, or under-construction pages.</li>
+          </ul>
+        </div>
+        <div class="rules__group">
+          <h3>3. Contest Categories (Suggested)</h3>
+          <ul class="chips">
+            <li>Best Overall Website ⭐</li>
+            <li>Best UI / Visual Design</li>
+            <li>Best UX / Usability</li>
+            <li>Best Performance &amp; Optimization</li>
+            <li>Best Accessibility</li>
+            <li>Best Innovation / Creativity</li>
+            <li>Best Small Business / Portfolio / Startup</li>
+          </ul>
+          <p>You can award multiple winners.</p>
+        </div>
+        <div class="rules__group">
+          <h3>4. Judging &amp; Scoring System (Recommended)</h3>
+          <p class="note">🔢 Total Score: 100 Points</p>
+          <ol class="scoring">
+            <li><strong>Design &amp; Visual Appeal — 25 pts:</strong> layout consistency, typography, color harmony, brand identity, visual hierarchy.</li>
+            <li><strong>User Experience (UX) — 25 pts:</strong> navigation ease, clarity of content, responsiveness, interaction flow.</li>
+            <li><strong>Technical Execution — 20 pts:</strong> performance, code quality, cross-browser support, SEO fundamentals.</li>
+            <li><strong>Creativity &amp; Innovation — 15 pts:</strong> originality, unique interactions, novel problem-solving.</li>
+            <li><strong>Accessibility &amp; Best Practices — 10 pts:</strong> contrast, keyboard navigation, semantic HTML, alt text.</li>
+            <li><strong>Content &amp; Messaging — 5 pts:</strong> clarity of purpose, copy quality, calls-to-action.</li>
+          </ol>
+          <p><strong>Bonus (+5 each, capped at 100):</strong> open-source contribution, sustainability/low-carbon design, exceptional documentation.</p>
+        </div>
+        <div class="rules__group">
+          <h3>5. Judging Process</h3>
+          <ul>
+            <li>Each site is scored independently by multiple judges.</li>
+            <li>Final score = average of all judges.</li>
+            <li>Tie-breaker priority: UX score → Design score → Innovation score.</li>
+          </ul>
+        </div>
+        <div class="rules__group">
+          <h3>6. Disqualification</h3>
+          <ul>
+            <li>Plagiarism or stolen designs.</li>
+            <li>AI-generated sites with no meaningful human input.</li>
+            <li>Inaccessible or broken websites.</li>
+            <li>False claims about ownership.</li>
+          </ul>
+        </div>
+        <div class="rules__group">
+          <h3>7. Rights &amp; Promotion</h3>
+          <ul>
+            <li>Entrants retain full ownership of their work.</li>
+            <li>By entering, you grant Dark Star Awards permission to showcase your site, display screenshots, and use your logo/name for promotional purposes.</li>
+          </ul>
+        </div>
+        <div class="rules__group">
+          <h3>8. Awards &amp; Recognition</h3>
+          <ul>
+            <li>Dark Star Awards digital badge.</li>
+            <li>Winner profile on the website.</li>
+            <li>Optional physical trophy (future expansion).</li>
+            <li>Social media and newsletter promotion.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="data" class="panel panel--alt">
+      <div class="panel__content data">
+        <div class="section-header">
+          <h2>Firebase Auth &amp; Data Capture</h2>
+          <p>Project ID: <code>project-777341514008</code> — Google sign-in ready with Firebase.</p>
+        </div>
+        <div class="data__grid">
+          <div class="data__card">
+            <h3>Authentication</h3>
+            <p>Enable Google as a provider in Firebase Authentication. Signed-in users can bookmark entries, vote, or submit judging notes.</p>
+          </div>
+          <div class="data__card">
+            <h3>Data to Track</h3>
+            <ul>
+              <li>User profiles: uid, displayName, email, photoURL, role (judge, entrant, admin).</li>
+              <li>Entries: title, public URL, category, description, tech stack, submitter uid, timestamps.</li>
+              <li>Judging: scores per criterion, comments, status, averaged totals.</li>
+            </ul>
+          </div>
+          <div class="data__card">
+            <h3>Recommended Firestore Rules</h3>
+            <pre class="code-block">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return request.auth.token.admin == true;
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    match /entries/{entryId} {
+      allow read: if true; // entries are public
+      allow create: if isSignedIn();
+      allow update, delete: if isAdmin() || request.auth.uid == resource.data.submitterId;
+    }
+
+    match /judging/{docId} {
+      allow read, write: if isAdmin() || request.auth.token.judge == true;
+    }
+  }
+}
+</pre>
+          </div>
+          <div class="data__card">
+            <h3>Recommended Storage Rules</h3>
+            <pre class="code-block">rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    match /user_uploads/{uid}/{allPaths=**} {
+      allow read: if true; // shared assets
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+  }
+}
+</pre>
+          </div>
+        </div>
+        <p class="note">Enable Firestore and Storage in production, and add indexes for queries (e.g., category, scores, updatedAt).</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© Dark Star Awards. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
