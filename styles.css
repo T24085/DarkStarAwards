@@ -273,20 +273,116 @@ a {
 
 /* Player Card Styles */
 .player-card {
-  background: rgba(10, 10, 14, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 24px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, rgba(18, 18, 24, 0.95), rgba(10, 10, 14, 0.95));
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transform: perspective(1000px) rotateY(-2deg) rotateX(1deg);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 60px rgba(212, 175, 55, 0.1),
+    0 0 20px rgba(212, 175, 55, 0.2);
   display: grid;
-  gap: 1rem;
-  transition: transform 0.2s, box-shadow 0.2s;
+  grid-template-rows: auto 1fr;
+  gap: 0;
+}
+
+.player-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .player-card:hover {
-  transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 32px rgba(212, 175, 55, 0.2);
-  border-color: rgba(212, 175, 55, 0.5);
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05) translateY(-10px);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 80px rgba(212, 175, 55, 0.2),
+    0 0 40px rgba(212, 175, 55, 0.4),
+    0 0 80px rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.8);
+  z-index: 10;
+}
+
+.player-card:nth-child(even) {
+  transform: perspective(1000px) rotateY(2deg) rotateX(-1deg);
+}
+
+.player-card:nth-child(even):hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05) translateY(-10px);
+}
+
+.player-card__visual {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(18, 18, 24, 0.9));
+}
+
+.player-card__thumbnail {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.thumbnail-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  transform: scale(1.1);
+  filter: brightness(0.7) contrast(1.1);
+  transition: transform 0.4s, filter 0.4s;
+  pointer-events: none;
+}
+
+.player-card:hover .thumbnail-iframe {
+  transform: scale(1);
+  filter: brightness(0.9) contrast(1.2);
+  pointer-events: auto;
+}
+
+.player-card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 1rem;
+  z-index: 2;
+}
+
+.player-card__badge {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.9), rgba(212, 175, 55, 0.7));
+  color: #0a0a0d;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.player-card__content {
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1rem;
 }
 
 .player-card__header {
@@ -294,36 +390,73 @@ a {
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
-  flex-wrap: wrap;
 }
 
-.player-card__meta {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  align-items: center;
+.player-card__name {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.02em;
   flex: 1;
 }
 
-.player-card__score {
-  background: linear-gradient(120deg, var(--gold), #f2d675);
-  color: #0a0a0d;
+.player-card__rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
   padding: 0.5rem 1rem;
-  border-radius: 999px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.rating-value {
+  color: var(--gold);
+  font-size: 1.8rem;
   font-weight: 700;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
-.player-card h3 {
-  margin: 0;
-  color: var(--text);
-  font-size: 1.3rem;
+.rating-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-.player-card p {
+.player-card__role {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.role-tag {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.stack-tag {
+  background: rgba(182, 182, 194, 0.1);
+  color: var(--muted);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(182, 182, 194, 0.2);
+}
+
+.player-card__description {
   color: var(--muted);
   line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 .player-card__stats {
@@ -360,14 +493,51 @@ a {
 .player-card__actions {
   display: flex;
   gap: 0.75rem;
-  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
-.button--small {
-  padding: 0.65rem 1.2rem;
-  font-size: 0.9rem;
+.card-button {
   flex: 1;
-  min-width: 140px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  border: none;
+}
+
+.card-button span {
+  font-size: 1.1rem;
+}
+
+.card-button--primary {
+  background: linear-gradient(135deg, var(--gold), #f2d675);
+  color: #0a0a0d;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.card-button--primary:hover {
+  background: linear-gradient(135deg, #f2d675, var(--gold));
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+  transform: translateY(-2px);
+}
+
+.card-button--secondary {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--gold);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.card-button--secondary:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: var(--gold);
+  transform: translateY(-2px);
 }
 
 .preview-icon {
@@ -450,70 +620,133 @@ a {
   border-bottom: 2px solid rgba(212, 175, 55, 0.3);
 }
 
-.player-card__stats {
+.player-card__stats-grid {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
-.stat {
+.stat-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 10px;
+  padding: 0.75rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-card:hover {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card__label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card__value {
+  color: var(--gold);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.stat-card__max {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.stat-card__bar {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.stat-card__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #f2d675);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+  transition: width 0.6s ease;
+}
+
+.player-card__total {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  box-shadow: 
+    inset 0 0 20px rgba(212, 175, 55, 0.2),
+    0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.total-score-display {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
-  background: rgba(212, 175, 55, 0.08);
-  border-radius: 8px;
-  border-left: 3px solid var(--gold);
-  transition: background 0.2s;
 }
 
-.stat:hover {
-  background: rgba(212, 175, 55, 0.15);
-}
-
-.stat__label {
+.total-label {
   color: var(--text);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-.stat__value {
+.total-value {
   color: var(--gold);
+  font-size: 2rem;
   font-weight: 700;
-  font-size: 1rem;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+  line-height: 1;
 }
 
-.total-score {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
-  border-radius: 10px;
-  border: 2px solid var(--gold);
-  margin-top: 1rem;
-}
-
-.total-score__label {
-  color: var(--text);
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.total-score__value {
-  color: var(--gold);
-  font-weight: 700;
-  font-size: 1.5rem;
-  text-shadow: 0 2px 8px rgba(212, 175, 55, 0.5);
+.total-max {
+  color: var(--muted);
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .no-scores {
   color: var(--muted);
   text-align: center;
   font-style: italic;
-  padding: 1rem;
+  padding: 2rem 1rem;
   margin: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 1px dashed rgba(212, 175, 55, 0.2);
 }
 
 
@@ -610,13 +843,31 @@ p {
 
 .entry-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2rem;
+  perspective: 2000px;
+  padding: 2rem 0;
+}
+
+@media (max-width: 900px) {
+  .entry-grid {
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 700px) {
   .entry-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .player-card {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) !important;
+  }
+  
+  .player-card:hover {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02) translateY(-5px) !important;
   }
 }
 

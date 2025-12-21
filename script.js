@@ -67,24 +67,104 @@ function renderEntries(entriesToRender = []) {
         const entryId = entry.id || entry.title.replace(/\s+/g, '-').toLowerCase();
         
         return `
-        <article class="player-card">
-          <div class="player-card__header">
-            <div class="player-card__meta">
-              <span class="chip">${entry.category}</span>
-              <span class="stack">${entry.stack}</span>
+        <article class="player-card" data-entry-id="${entryId}">
+          <div class="player-card__visual">
+            <div class="player-card__thumbnail">
+              <iframe 
+                src="${entry.url}" 
+                class="thumbnail-iframe"
+                frameborder="0"
+                loading="eager"
+                title="Preview of ${entry.title}">
+              </iframe>
+              <div class="player-card__overlay">
+                <span class="player-card__badge">${entry.category}</span>
+              </div>
             </div>
-            ${avgScore !== null ? `<div class="player-card__score">${avgScore.toFixed(1)}/100</div>` : ''}
           </div>
-          <h3>${entry.title}</h3>
-          <p>${entry.description}</p>
           
-          <div class="player-card__actions">
-            <button class="button button--small" onclick="togglePreview('${entryId}')" id="previewBtn-${entryId}">
-              <span class="preview-icon">👁️</span> Show Preview
-            </button>
-            <a class="button button--small button--ghost" href="${entry.url}" target="_blank" rel="noopener noreferrer">
-              Visit Website →
-            </a>
+          <div class="player-card__content">
+            <div class="player-card__header">
+              <h3 class="player-card__name">${entry.title}</h3>
+              ${avgScore !== null ? `
+                <div class="player-card__rating">
+                  <span class="rating-value">${avgScore.toFixed(1)}</span>
+                  <span class="rating-label">/100</span>
+                </div>
+              ` : ''}
+            </div>
+            
+            <div class="player-card__role">
+              <span class="role-tag">${entry.category}</span>
+              <span class="stack-tag">${entry.stack}</span>
+            </div>
+            
+            <p class="player-card__description">${entry.description}</p>
+            
+            ${entry.scores ? `
+              <div class="player-card__stats-grid">
+                <div class="stat-card">
+                  <div class="stat-card__label">Design</div>
+                  <div class="stat-card__value">${entry.scores.design || 0}<span class="stat-card__max">/25</span></div>
+                  <div class="stat-card__bar">
+                    <div class="stat-card__fill" style="width: ${((entry.scores.design || 0) / 25) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card__label">UX</div>
+                  <div class="stat-card__value">${entry.scores.ux || 0}<span class="stat-card__max">/25</span></div>
+                  <div class="stat-card__bar">
+                    <div class="stat-card__fill" style="width: ${((entry.scores.ux || 0) / 25) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card__label">Technical</div>
+                  <div class="stat-card__value">${entry.scores.technical || 0}<span class="stat-card__max">/20</span></div>
+                  <div class="stat-card__bar">
+                    <div class="stat-card__fill" style="width: ${((entry.scores.technical || 0) / 20) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card__label">Creativity</div>
+                  <div class="stat-card__value">${entry.scores.creativity || 0}<span class="stat-card__max">/15</span></div>
+                  <div class="stat-card__bar">
+                    <div class="stat-card__fill" style="width: ${((entry.scores.creativity || 0) / 15) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card__label">Accessibility</div>
+                  <div class="stat-card__value">${entry.scores.accessibility || 0}<span class="stat-card__max">/10</span></div>
+                  <div class="stat-card__bar">
+                    <div class="stat-card__fill" style="width: ${((entry.scores.accessibility || 0) / 10) * 100}%"></div>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card__label">Content</div>
+                  <div class="stat-card__value">${entry.scores.content || 0}<span class="stat-card__max">/5</span></div>
+                  <div class="stat-card__bar">
+                    <div class="stat-card__fill" style="width: ${((entry.scores.content || 0) / 5) * 100}%"></div>
+                  </div>
+                </div>
+              </div>
+              
+              ${totalScore !== null ? `
+                <div class="player-card__total">
+                  <div class="total-score-display">
+                    <span class="total-label">TOTAL SCORE</span>
+                    <span class="total-value">${totalScore}<span class="total-max">/100</span></span>
+                  </div>
+                </div>
+              ` : ''}
+            ` : '<div class="player-card__stats-grid"><p class="no-scores">Scores pending judge review</p></div>'}
+            
+            <div class="player-card__actions">
+              <button class="card-button card-button--primary" onclick="togglePreview('${entryId}')" id="previewBtn-${entryId}">
+                <span>👁️</span> Preview
+              </button>
+              <a class="card-button card-button--secondary" href="${entry.url}" target="_blank" rel="noopener noreferrer">
+                <span>→</span> Visit Site
+              </a>
+            </div>
           </div>
           
           <div class="player-card__preview" id="preview-${entryId}" style="display: none;">
@@ -101,44 +181,6 @@ function renderEntries(entriesToRender = []) {
               title="Preview of ${entry.title}">
             </iframe>
           </div>
-          
-          ${entry.scores ? `
-            <div class="player-card__scores-section">
-              <h4 class="scores-title">Judging Scores</h4>
-              <div class="player-card__stats">
-                <div class="stat">
-                  <span class="stat__label">Design & Visual Appeal</span>
-                  <span class="stat__value">${entry.scores.design || 0}/25</span>
-                </div>
-                <div class="stat">
-                  <span class="stat__label">User Experience (UX)</span>
-                  <span class="stat__value">${entry.scores.ux || 0}/25</span>
-                </div>
-                <div class="stat">
-                  <span class="stat__label">Technical Execution</span>
-                  <span class="stat__value">${entry.scores.technical || 0}/20</span>
-                </div>
-                <div class="stat">
-                  <span class="stat__label">Creativity & Innovation</span>
-                  <span class="stat__value">${entry.scores.creativity || 0}/15</span>
-                </div>
-                <div class="stat">
-                  <span class="stat__label">Accessibility & Best Practices</span>
-                  <span class="stat__value">${entry.scores.accessibility || 0}/10</span>
-                </div>
-                <div class="stat">
-                  <span class="stat__label">Content & Messaging</span>
-                  <span class="stat__value">${entry.scores.content || 0}/5</span>
-                </div>
-              </div>
-              ${totalScore !== null ? `
-                <div class="total-score">
-                  <span class="total-score__label">Total Score</span>
-                  <span class="total-score__value">${totalScore}/100</span>
-                </div>
-              ` : ''}
-            </div>
-          ` : '<div class="player-card__scores-section"><p class="no-scores">Scores pending judge review</p></div>'}
         </article>
       `;
       }
