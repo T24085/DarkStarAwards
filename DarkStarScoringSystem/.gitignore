@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Environment
+.env
+.env.local
+
+# Firebase
+credentials/
+*.json
+!schemas/*.json
+
+# Artifacts
+artifacts/
+*.png
+*.jpg
+*.json
+!schemas/*.json
+
+# Logs
+*.log
+dsss_worker.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

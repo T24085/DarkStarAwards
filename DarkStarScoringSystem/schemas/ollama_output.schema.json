@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["scores", "notes"],
+  "properties": {
+    "judgeVersion": {
+      "type": "string"
+    },
+    "scores": {
+      "type": "object",
+      "required": ["design", "ux", "creativity", "content"],
+      "properties": {
+        "design": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 25
+        },
+        "ux": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 25
+        },
+        "creativity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "content": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "bonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "required": ["design", "ux", "creativity", "content", "overall"],
+      "properties": {
+        "design": {
+          "type": "string"
+        },
+        "ux": {
+          "type": "string"
+        },
+        "creativity": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "overall": {
+          "type": "string"
+        }
+      }
+    },
+    "flags": {
+      "type": "object",
+      "properties": {
+        "possibleTemplate": {
+          "type": "boolean"
+        },
+        "majorBrokenUX": {
+          "type": "boolean"
+        },
+        "accessibilityConcerns": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
+
