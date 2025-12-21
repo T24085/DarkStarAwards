@@ -158,28 +158,10 @@ function renderEntries(entriesToRender = []) {
             ` : '<div class="player-card__stats-grid"><p class="no-scores">Scores pending judge review</p></div>'}
             
             <div class="player-card__actions">
-              <button class="card-button card-button--primary" onclick="togglePreview('${entryId}')" id="previewBtn-${entryId}">
-                <span>👁️</span> Preview
-              </button>
-              <a class="card-button card-button--secondary" href="${entry.url}" target="_blank" rel="noopener noreferrer">
+              <a class="card-button card-button--primary" href="${entry.url}" target="_blank" rel="noopener noreferrer">
                 <span>→</span> Visit Site
               </a>
             </div>
-          </div>
-          
-          <div class="player-card__preview" id="preview-${entryId}" style="display: none;">
-            <div class="preview-header">
-              <span class="preview-label">Live Preview</span>
-              <button class="preview-close" onclick="togglePreview('${entryId}')">&times;</button>
-            </div>
-            <iframe 
-              src="${entry.url}" 
-              class="preview-iframe"
-              frameborder="0"
-              allow="fullscreen"
-              loading="lazy"
-              title="Preview of ${entry.title}">
-            </iframe>
           </div>
         </article>
       `;
@@ -194,22 +176,6 @@ function calculateAverageScore(scores) {
   return values.reduce((a, b) => a + b, 0) / values.length;
 }
 
-// Toggle website preview
-function togglePreview(entryId) {
-  const preview = document.getElementById(`preview-${entryId}`);
-  const btn = document.getElementById(`previewBtn-${entryId}`);
-  
-  if (preview.style.display === 'none') {
-    preview.style.display = 'block';
-    btn.innerHTML = '<span class="preview-icon">👁️</span> Hide Preview';
-  } else {
-    preview.style.display = 'none';
-    btn.innerHTML = '<span class="preview-icon">👁️</span> Show Preview';
-  }
-}
-
-// Make togglePreview available globally
-window.togglePreview = togglePreview;
 
 // Authentication functions
 let isSignUpMode = false;
