@@ -64,6 +64,8 @@ function renderEntries(entriesToRender = []) {
         const avgScore = entry.scores ? calculateAverageScore(entry.scores) : null;
         const totalScore = entry.scores ? Object.values(entry.scores).reduce((a, b) => a + b, 0) : null;
         
+        const entryId = entry.id || entry.title.replace(/\s+/g, '-').toLowerCase();
+        
         return `
         <article class="player-card">
           <div class="player-card__header">
@@ -75,35 +77,68 @@ function renderEntries(entriesToRender = []) {
           </div>
           <h3>${entry.title}</h3>
           <p>${entry.description}</p>
-          ${entry.scores ? `
-            <div class="player-card__stats">
-              <div class="stat">
-                <span class="stat__label">Design</span>
-                <span class="stat__value">${entry.scores.design || 0}/25</span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">UX</span>
-                <span class="stat__value">${entry.scores.ux || 0}/25</span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">Technical</span>
-                <span class="stat__value">${entry.scores.technical || 0}/20</span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">Creativity</span>
-                <span class="stat__value">${entry.scores.creativity || 0}/15</span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">Accessibility</span>
-                <span class="stat__value">${entry.scores.accessibility || 0}/10</span>
-              </div>
-              <div class="stat">
-                <span class="stat__label">Content</span>
-                <span class="stat__value">${entry.scores.content || 0}/5</span>
-              </div>
+          
+          <div class="player-card__actions">
+            <button class="button button--small" onclick="togglePreview('${entryId}')" id="previewBtn-${entryId}">
+              <span class="preview-icon">👁️</span> Show Preview
+            </button>
+            <a class="button button--small button--ghost" href="${entry.url}" target="_blank" rel="noopener noreferrer">
+              Visit Website →
+            </a>
+          </div>
+          
+          <div class="player-card__preview" id="preview-${entryId}" style="display: none;">
+            <div class="preview-header">
+              <span class="preview-label">Live Preview</span>
+              <button class="preview-close" onclick="togglePreview('${entryId}')">&times;</button>
             </div>
-          ` : ''}
-          <a class="player-card__link" href="${entry.url}" target="_blank" rel="noopener noreferrer">Visit Website</a>
+            <iframe 
+              src="${entry.url}" 
+              class="preview-iframe"
+              frameborder="0"
+              allow="fullscreen"
+              loading="lazy"
+              title="Preview of ${entry.title}">
+            </iframe>
+          </div>
+          
+          ${entry.scores ? `
+            <div class="player-card__scores-section">
+              <h4 class="scores-title">Judging Scores</h4>
+              <div class="player-card__stats">
+                <div class="stat">
+                  <span class="stat__label">Design & Visual Appeal</span>
+                  <span class="stat__value">${entry.scores.design || 0}/25</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__label">User Experience (UX)</span>
+                  <span class="stat__value">${entry.scores.ux || 0}/25</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__label">Technical Execution</span>
+                  <span class="stat__value">${entry.scores.technical || 0}/20</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__label">Creativity & Innovation</span>
+                  <span class="stat__value">${entry.scores.creativity || 0}/15</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__label">Accessibility & Best Practices</span>
+                  <span class="stat__value">${entry.scores.accessibility || 0}/10</span>
+                </div>
+                <div class="stat">
+                  <span class="stat__label">Content & Messaging</span>
+                  <span class="stat__value">${entry.scores.content || 0}/5</span>
+                </div>
+              </div>
+              ${totalScore !== null ? `
+                <div class="total-score">
+                  <span class="total-score__label">Total Score</span>
+                  <span class="total-score__value">${totalScore}/100</span>
+                </div>
+              ` : ''}
+            </div>
+          ` : '<div class="player-card__scores-section"><p class="no-scores">Scores pending judge review</p></div>'}
         </article>
       `;
       }
@@ -116,6 +151,23 @@ function calculateAverageScore(scores) {
   if (values.length === 0) return 0;
   return values.reduce((a, b) => a + b, 0) / values.length;
 }
+
+// Toggle website preview
+function togglePreview(entryId) {
+  const preview = document.getElementById(`preview-${entryId}`);
+  const btn = document.getElementById(`previewBtn-${entryId}`);
+  
+  if (preview.style.display === 'none') {
+    preview.style.display = 'block';
+    btn.innerHTML = '<span class="preview-icon">👁️</span> Hide Preview';
+  } else {
+    preview.style.display = 'none';
+    btn.innerHTML = '<span class="preview-icon">👁️</span> Show Preview';
+  }
+}
+
+// Make togglePreview available globally
+window.togglePreview = togglePreview;
 
 // Authentication functions
 let isSignUpMode = false;
