@@ -4,24 +4,48 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dark Star Awards</title>
-  <link rel="preload" as="video" href="./BackgroundVideo.mp4" type="video/mp4">
+  <link rel="preload" as="video" href="./DSABackground.mp4" type="video/mp4">
   <link rel="preload" as="image" href="./DSALogo.png">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="hero">
-    <video class="hero__video" autoplay muted loop playsinline poster="./DSALogo.png">
-      <source src="./BackgroundVideo.mp4" type="video/mp4">
+  <div class="background-grid">
+    <video class="site-background" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./DSABackground.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
-    <div class="hero__overlay"></div>
+    <video class="site-background" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./DSABackground.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video class="site-background" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./DSABackground.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video class="site-background" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./DSABackground.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video class="site-background" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./DSABackground.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video class="site-background" autoplay muted loop playsinline poster="./DSALogo.png">
+      <source src="./DSABackground.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="site-overlay"></div>
+  <header class="hero">
     <div class="hero__content">
       <img src="./DSALogo.png" alt="Dark Star Awards logo" class="hero__logo">
       <p class="hero__tagline">Celebrating the boldest creators in the Dark Star community.</p>
 
       <div class="hero__actions">
         <a class="button" href="#entries">Submit Your Entry</a>
+        <button class="button button--ghost" id="authButton">Sign In</button>
       </div>
+      <p class="auth-note" id="authStatus" aria-live="polite"></p>
 
     </div>
   </header>
@@ -79,6 +103,9 @@
           <p>Viewer-friendly cards with direct links to the websites competitors upload.</p>
         </div>
         <div class="entry-grid" id="entryGrid" aria-live="polite"></div>
+        <div id="submitEntrySection" style="display: none; margin-top: 2rem; text-align: center;">
+          <button class="button" id="showSubmitForm">Submit New Entry</button>
+        </div>
       </div>
     </section>
 
@@ -205,6 +232,67 @@
     <p>© Dark Star Awards. All rights reserved.</p>
   </footer>
 
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal" style="display: none;">
+    <div class="modal__content">
+      <button class="modal__close" id="closeAuthModal">&times;</button>
+      <h2 id="authModalTitle">Sign In</h2>
+      <form id="authForm">
+        <div id="nameField" style="display: none;">
+          <label for="displayName">Display Name</label>
+          <input type="text" id="displayName" placeholder="Your name">
+        </div>
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="your@email.com">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="••••••••" minlength="6">
+        <button type="submit" class="button" id="authSubmit">Sign In</button>
+        <p id="authError" class="error-message"></p>
+        <p class="auth-switch">
+          <span id="authSwitchText">Don't have an account?</span>
+          <button type="button" class="link-button" id="toggleAuthMode">Sign Up</button>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Submit Entry Modal -->
+  <div id="submitModal" class="modal" style="display: none;">
+    <div class="modal__content">
+      <button class="modal__close" id="closeSubmitModal">&times;</button>
+      <h2>Submit Your Entry</h2>
+      <form id="submitEntryForm">
+        <label for="entryTitle">Website Title *</label>
+        <input type="text" id="entryTitle" required placeholder="My Awesome Website">
+        
+        <label for="entryUrl">Website URL *</label>
+        <input type="url" id="entryUrl" required placeholder="https://example.com">
+        
+        <label for="entryCategory">Category *</label>
+        <select id="entryCategory" required>
+          <option value="">Select a category</option>
+          <option value="Best Overall Website ⭐">Best Overall Website ⭐</option>
+          <option value="Best UI / Visual Design">Best UI / Visual Design</option>
+          <option value="Best UX / Usability">Best UX / Usability</option>
+          <option value="Best Performance & Optimization">Best Performance & Optimization</option>
+          <option value="Best Accessibility">Best Accessibility</option>
+          <option value="Best Innovation / Creativity">Best Innovation / Creativity</option>
+          <option value="Best Small Business / Portfolio / Startup">Best Small Business / Portfolio / Startup</option>
+        </select>
+        
+        <label for="entryStack">Tech Stack *</label>
+        <input type="text" id="entryStack" required placeholder="HTML · CSS · JavaScript">
+        
+        <label for="entryDescription">Description *</label>
+        <textarea id="entryDescription" required rows="4" placeholder="Describe your website..."></textarea>
+        
+        <button type="submit" class="button">Submit Entry</button>
+        <p id="submitError" class="error-message"></p>
+        <p id="submitSuccess" class="success-message"></p>
+      </form>
+    </div>
+  </div>
 
   <script type="module" src="./script.js"></script>
 
